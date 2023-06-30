@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "sabor":"Frango c/ catupiry",
+        "tamanho": "p",
+        "preco": 30.00
+    },
+    {
+        "_id": 2,
+      "nome": "Quatro Queijos",
+      "tamanho": "g",
+      "preco": 40.00
+    }
+]

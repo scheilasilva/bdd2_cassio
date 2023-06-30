@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "Nome": "Diogo",
+        "Endereço":"RUa Maracanã",
+        "Telefone": "51996187827"
+    },
+
+    {
+        "id":2,
+        "Nome":"Scheila",
+        "Endereço": "RUa Maracanã",
+        "Telefone": "51 998900614"
+        }
+]

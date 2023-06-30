@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "sabor":"suco de uva",
+        "tamanho": "500ml",
+        "valor": 5.00
+    },
+    {
+        "id": 2,
+        "sabor":"coca cola",
+        "tamanho":"1l",
+        "valor": 10.00
+    }
+]

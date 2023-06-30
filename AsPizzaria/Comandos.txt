@@ -1,0 +1,142 @@
+3 -> Comandos MongoDB para criar as coleções e inserir os dados.
+
+Criando o database:
+
+    use Pizzaria
+
+Inserindo o cliente:
+  
+    db.cliente.insertOne([
+        { "id": 1,
+        "Nome": "Diogo",
+        "Endereço":"Rua Maracanã",
+        "Telefone": "51996187827"
+        }
+    ])
+
+
+Inserindo o pedido:
+
+    db.pedido.insertOne([
+    {
+           "id":5,
+        "Cliente_id":1,
+        "tipo": "entrega",
+        "data_pedido": "2023-06-17 17:26",
+        "itens":[
+            {
+                "pizza_id": 1,
+                "quantidade":1
+            },
+            {
+                "bebida_id":2,
+                "quantidade":1
+            }
+            
+        ],
+        "valor_total": 40.00
+    }
+ ])
+
+Inserindo o produto:
+
+ db.produto.insertOne([
+    {
+        "_id": 3,
+      "nome": "Chocolate",
+      "tamanho": "g",
+      "preco": 50.00
+    },
+    {
+        "id": 3,
+        "sabor":"pepsi",
+        "tamanho":"2l",
+        "valor": 15.00
+    }
+ ])
+
+-----------------------------------------------------------------------------------------
+
+ 4 -> Comandos MongoDB para realizar atualizações e exclusões de dados. 
+
+    db.cliente.updateOne(
+  { "id": 1 },
+  { $set: { "endereco": "Rua Leonardo truda 901} }
+)
+
+    db.pedido.updateOne(
+  { "id": 5 },
+  { $set:  { "tipo": "vem buscar" } }
+)
+
+    db.pizza.updateOne(
+  { "id": 1 },
+  { $set: { "preco": 30.90 } }
+)
+
+    db.bebidas.updateOne(
+  { "id": 1 },
+  { $set: { "preco": 6.00 } }
+)
+
+    db.itens_pedidos.updateOne(
+  { "id": 1 },
+  { $set: {"bebida_id":2,"quantidade":3 } } 
+)
+
+db.cliente.deleteOne({ "id": 1 })
+db.pedido.deleteOne({ "id": 5 })
+db.pizza.deleteOne({ "id": 2 })
+db.bebida.deleteOne({ "id": 1 })
+
+-----------------------------------------------------------------------------------------
+
+5 -> Comandos MongoDB para as consultas que devem incluir pelo menos uma de cada: consulta simples, consulta com uma condição.
+
+db.pizza.find()
+db.cliente.find()
+db.pedido.find()
+
+db.pedidos.find({ "tipo": "entrega" })
+
+6 -> Comando MongoDB com 2 consultas usando Aggregate. Uma que utilize join e outra que utilize group by.
+
+db.pedido.aggregate([
+  {
+    $lookup: {
+      from: "cliente",
+      localField: "id_cliente",
+      foreignField: "id",
+      as: "cliente"
+    }
+  },
+  { $unwind: "$cliente" }
+])
+
+db.pedidos.aggregate([
+    {
+        $unwind: "$itens"
+    },
+    {
+        $lookup: {
+        from: "pizzas",
+        localField: "itens.pizza_id",
+        foreignField: "_id",
+        as: "pizza"
+        }
+    },
+    {
+        $group: {
+        _id: "$pizza.sabor",
+        quantidade_total: { $sum: "$itens.quantidade" }
+        }
+    }
+])
+
+7 -> Índices apropriados para melhorar o desempenho das consultas. Explicar por que desses índices.
+
+db.cliente.createIndex({ "id": 1 })
+com isso ajuda a acelerar a busca por clientes com base no seu id
+
+db.pedido.createIndex({ "Cliente_id": 1 })
+permite uma recuperação mais rapida dos pedidos associados a um cliente 

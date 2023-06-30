@@ -1,0 +1,38 @@
+[
+    {
+        "id":5,
+        "Cliente_id":1,
+        "tipo": "entrega",
+        "data_pedido": "2023-06-17 17:26",
+        "itens":[
+            {
+                "pizza_id": 1,
+                "quantidade":1
+            },
+            {
+                "bebida_id":2,
+                "quantidade":2
+            }
+            
+        ],
+        "valor_total": 50.00
+    },
+    {
+        "id":6,
+        "Cliente_id":2,
+        "tipo": "ComerNoLocal",
+        "data_pedido": "2023-06-20 18:26",
+        "itens":[
+            {
+                "pizza_id": 2,
+                "quantidade":3
+            },
+            {
+                "bebida_id":1,
+                "quantidade":2
+            }
+            
+        ],
+        "valor_total": 90.00
+    }
+]
